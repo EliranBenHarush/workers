@@ -9,7 +9,6 @@ import {
 import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import { auth, db } from "@/lib/firebase";
 import { Job, Professional } from "@/lib/types";
-import { ShieldCheck, MapPin, Phone, Inbox, LogOut, Briefcase, SendHorizontal } from "lucide-react";
 
 type JobWithId = Job & { id: string };
 
@@ -117,39 +116,39 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#F5F7FC] flex items-center justify-center">
+      <div className="min-h-screen bg-[#0E0F0C] flex items-center justify-center">
         <div className="text-center">
-          <div className="w-8 h-8 border-4 border-[#2C3FB5] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-[#6B7398] text-[14px]">טוען לידים...</p>
+          <div className="w-8 h-8 border-4 border-[#CBF24D] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-[#9A9C92] text-[14px]">טוען לידים...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#F5F7FC]">
+    <div className="min-h-screen bg-[#0E0F0C]">
       {/* Header */}
-      <header className="bg-white border-b border-[#E3E7F4] sticky top-0 z-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-[16px] flex items-center justify-between">
+      <header className="bg-[#0E0F0C]/95 backdrop-blur-sm border-b border-white/[0.07] sticky top-0 z-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
           <Link
             href="/"
-            className="flex items-center gap-[9px]"
-            style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 20, color: "#0E1A3A" }}
+            className="flex items-center gap-2"
+            style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 20, color: "#F5F6F1" }}
           >
-            <span className="w-[28px] h-[28px] rounded-lg bg-[#2C3FB5] flex items-center justify-center text-white">
-              <ShieldCheck size={16} />
+            <span className="w-8 h-8 rounded-lg bg-[#CBF24D] flex items-center justify-center">
+              <span className="ms text-[#12140C]" style={{ fontSize: 18 }}>handyman</span>
             </span>
             <span className="hidden sm:inline">מקצוענים</span>
           </Link>
           <div className="flex items-center gap-3 sm:gap-4">
-            <span className="text-[13px] sm:text-[14px] text-[#6B7398] hidden sm:block">
+            <span className="text-[13px] sm:text-[14px] text-[#9A9C92] hidden sm:block">
               שלום, {profile?.name}
             </span>
             <button
               onClick={handleSignOut}
-              className="flex items-center gap-1.5 text-[13px] text-[#6B7398] hover:text-red-500 transition-colors cursor-pointer"
+              className="flex items-center gap-1.5 text-[13px] text-[#9A9C92] hover:text-red-400 transition-colors cursor-pointer"
             >
-              <LogOut size={15} />
+              <span className="ms" style={{ fontSize: 16 }}>logout</span>
               <span className="hidden sm:inline">יציאה</span>
             </button>
           </div>
@@ -159,69 +158,69 @@ export default function DashboardPage() {
       <main className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Stats */}
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-7 sm:mb-8">
-          <div className="bg-white rounded-xl p-4 border border-[#E3E7F4] shadow-[0_2px_8px_rgba(20,30,80,0.05)] text-center">
+          <div className="bg-[#1B1D18] border border-white/[0.07] rounded-xl p-4 text-center">
             <div
               className="text-[28px] sm:text-[32px] mb-0.5"
-              style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, color: "#2C3FB5" }}
+              style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, color: "#CBF24D" }}
             >
               {jobs.length}
             </div>
-            <div className="text-[12px] sm:text-[13px] text-[#6B7398]">לידים פתוחים</div>
+            <div className="text-[12px] sm:text-[13px] text-[#9A9C92]">לידים פתוחים</div>
           </div>
-          <div className="bg-white rounded-xl p-4 border border-[#E3E7F4] shadow-[0_2px_8px_rgba(20,30,80,0.05)] text-center">
+          <div className="bg-[#1B1D18] border border-white/[0.07] rounded-xl p-4 text-center">
             <div
               className="text-[28px] sm:text-[32px] mb-0.5"
-              style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, color: "#1A8F4C" }}
+              style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, color: "#4ADE80" }}
             >
               {expressedInterest.size}
             </div>
-            <div className="text-[12px] sm:text-[13px] text-[#6B7398]">פניות שלחתי</div>
+            <div className="text-[12px] sm:text-[13px] text-[#9A9C92]">פניות שלחתי</div>
           </div>
-          <div className="bg-white rounded-xl p-4 border border-[#E3E7F4] shadow-[0_2px_8px_rgba(20,30,80,0.05)] text-center col-span-2 sm:col-span-1">
-            <div className="text-[14px] sm:text-[15px] font-bold text-[#0E1A3A] mb-0.5 truncate">
+          <div className="bg-[#1B1D18] border border-white/[0.07] rounded-xl p-4 text-center col-span-2 sm:col-span-1">
+            <div className="text-[14px] sm:text-[15px] font-bold text-[#F5F6F1] mb-0.5 truncate">
               {profile?.cities.slice(0, 2).join(", ")}
               {(profile?.cities.length ?? 0) > 2 && " +עוד"}
             </div>
-            <div className="text-[12px] sm:text-[13px] text-[#6B7398]">אזורי שירות</div>
+            <div className="text-[12px] sm:text-[13px] text-[#9A9C92]">אזורי שירות</div>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b border-[#E3E7F4] mb-5 sm:mb-6">
+        <div className="flex border-b border-white/[0.07] mb-5 sm:mb-6">
           <button
             onClick={() => setActiveTab("all")}
             className={`flex items-center gap-2 px-4 sm:px-6 py-3 text-[13px] sm:text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${
               activeTab === "all"
-                ? "border-[#2C3FB5] text-[#2C3FB5]"
-                : "border-transparent text-[#6B7398] hover:text-[#0E1A3A]"
+                ? "border-[#CBF24D] text-[#CBF24D]"
+                : "border-transparent text-[#9A9C92] hover:text-[#F5F6F1]"
             }`}
           >
-            <Briefcase size={15} />
+            <span className="ms" style={{ fontSize: 16 }}>work</span>
             כל הלידים ({jobs.length})
           </button>
           <button
             onClick={() => setActiveTab("interested")}
             className={`flex items-center gap-2 px-4 sm:px-6 py-3 text-[13px] sm:text-[14px] font-semibold border-b-2 transition-colors cursor-pointer ${
               activeTab === "interested"
-                ? "border-[#2C3FB5] text-[#2C3FB5]"
-                : "border-transparent text-[#6B7398] hover:text-[#0E1A3A]"
+                ? "border-[#CBF24D] text-[#CBF24D]"
+                : "border-transparent text-[#9A9C92] hover:text-[#F5F6F1]"
             }`}
           >
-            <SendHorizontal size={15} />
+            <span className="ms" style={{ fontSize: 16 }}>send</span>
             פניות שלחתי ({expressedInterest.size})
           </button>
         </div>
 
         {/* Jobs list */}
         {displayedJobs.length === 0 ? (
-          <div className="text-center py-14 sm:py-16 bg-white rounded-2xl border border-[#E3E7F4]">
+          <div className="text-center py-14 sm:py-16 bg-[#1B1D18] border border-white/[0.07] rounded-2xl">
             <div className="flex justify-center mb-4">
-              <Inbox size={52} className="text-[#C9D1F4]" strokeWidth={1.2} />
+              <span className="ms text-[#74766d]" style={{ fontSize: 52 }}>inbox</span>
             </div>
-            <h3 className="text-[16px] font-bold text-[#0E1A3A] mb-2">
+            <h3 className="text-[16px] font-bold text-[#F5F6F1] mb-2">
               {activeTab === "all" ? "אין לידים כרגע" : "עדיין לא שלחת פניות"}
             </h3>
-            <p className="text-[13px] text-[#9AA3C4] max-w-xs mx-auto leading-relaxed">
+            <p className="text-[13px] text-[#74766d] max-w-xs mx-auto leading-relaxed">
               {activeTab === "all"
                 ? "לידים חדשים יופיעו כאן בזמן אמת"
                 : "לחץ על 'אני מעוניין' בליד כלשהו כדי לפנות ללקוח"}
@@ -234,53 +233,53 @@ export default function DashboardPage() {
               return (
                 <div
                   key={job.id}
-                  className={`bg-white rounded-2xl border border-[#E3E7F4] shadow-[0_2px_8px_rgba(20,30,80,0.05)] p-4 sm:p-6 border-r-4 ${
-                    alreadyInterested ? "border-r-[#1A8F4C]" : "border-r-[#2C3FB5]"
+                  className={`bg-[#1B1D18] rounded-2xl border border-white/[0.07] p-4 sm:p-6 border-r-4 ${
+                    alreadyInterested ? "border-r-[#4ADE80]" : "border-r-[#CBF24D]"
                   }`}
                 >
                   {/* Tags row */}
                   <div className="flex flex-wrap items-center gap-2 mb-2.5">
-                    <span className="bg-[#EAEEFB] text-[#2C3FB5] text-[11px] sm:text-[12px] font-semibold px-2.5 py-1 rounded-full">
+                    <span className="bg-[#CBF24D]/10 text-[#CBF24D] text-[11px] sm:text-[12px] font-semibold px-2.5 py-1 rounded-full border border-[#CBF24D]/20">
                       {job.category}
                     </span>
-                    <span className="flex items-center gap-1 bg-[#F5F7FC] text-[#6B7398] text-[11px] sm:text-[12px] px-2.5 py-1 rounded-full border border-[#E3E7F4]">
-                      <MapPin size={10} />
+                    <span className="flex items-center gap-1 bg-[#0E0F0C] text-[#9A9C92] text-[11px] sm:text-[12px] px-2.5 py-1 rounded-full border border-white/[0.07]">
+                      <span className="ms" style={{ fontSize: 12 }}>location_on</span>
                       {job.city}
                     </span>
                     {job.createdAt && (
-                      <span className="text-[11px] text-[#9AA3C4]">
+                      <span className="text-[11px] text-[#74766d]">
                         {timeAgo(job.createdAt)}
                       </span>
                     )}
                     {alreadyInterested && (
-                      <span className="bg-[#E4F6EC] text-[#1A8F4C] text-[11px] sm:text-[12px] font-semibold px-2.5 py-1 rounded-full">
+                      <span className="bg-[#4ADE80]/10 text-[#4ADE80] text-[11px] sm:text-[12px] font-semibold px-2.5 py-1 rounded-full border border-[#4ADE80]/20">
                         ✓ פנית
                       </span>
                     )}
                   </div>
 
                   {/* Description */}
-                  <p className="text-[#3A4263] text-[13px] sm:text-[14px] leading-relaxed mb-3">
+                  <p className="text-[#c7c9c0] text-[13px] sm:text-[14px] leading-relaxed mb-3">
                     {job.description}
                   </p>
 
                   {/* Footer row: name + action */}
                   <div className="flex items-center justify-between gap-3 flex-wrap">
-                    <p className="text-[12px] sm:text-[13px] text-[#9AA3C4]">
+                    <p className="text-[12px] sm:text-[13px] text-[#74766d]">
                       פרסם: {job.name}
                     </p>
                     {alreadyInterested ? (
                       <a
                         href={`tel:${job.phone}`}
-                        className="flex items-center gap-2 bg-[#1A8F4C] text-white text-[13px] font-semibold px-4 py-2 rounded-xl hover:bg-[#158040] transition-colors whitespace-nowrap cursor-pointer"
+                        className="flex items-center gap-2 bg-[#4ADE80] text-[#0a1f12] text-[13px] font-semibold px-4 py-2 rounded-xl hover:bg-[#22c55e] transition-colors whitespace-nowrap cursor-pointer"
                       >
-                        <Phone size={14} />
+                        <span className="ms" style={{ fontSize: 14 }}>call</span>
                         {job.phone}
                       </a>
                     ) : (
                       <button
                         onClick={() => handleInterest(job)}
-                        className="bg-[#2C3FB5] text-white text-[13px] font-semibold px-4 py-2 rounded-xl hover:bg-[#2233a0] transition-colors whitespace-nowrap cursor-pointer"
+                        className="bg-[#CBF24D] text-[#12140C] text-[13px] font-semibold px-4 py-2 rounded-xl hover:bg-[#B8DB38] transition-colors whitespace-nowrap cursor-pointer"
                       >
                         אני מעוניין
                       </button>

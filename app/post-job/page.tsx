@@ -3,7 +3,6 @@
 import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { ShieldCheck, Lock } from "lucide-react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { JOB_CATEGORIES, CITIES, JobCategory } from "@/lib/types";
@@ -56,24 +55,24 @@ function PostJobForm() {
     }
   };
 
-  const inputClass = "w-full border border-[#E3E7F4] rounded-xl px-4 py-3 text-[#0E1A3A] placeholder-[#9AA3C4] bg-white focus:outline-none focus:ring-2 focus:ring-[#2C3FB5] focus:border-transparent transition-shadow text-[15px]";
+  const inputClass = "w-full border border-white/[0.08] rounded-xl px-4 py-3 text-[#F5F6F1] placeholder-[#74766d] bg-[#1B1D18] focus:outline-none focus:ring-2 focus:ring-[#CBF24D]/40 focus:border-[#CBF24D]/50 transition-all text-[15px]";
 
   return (
-    <div className="min-h-screen bg-[#F5F7FC]">
+    <div className="min-h-screen bg-[#0E0F0C]">
       {/* Header */}
-      <header className="bg-white border-b border-[#E3E7F4] sticky top-0 z-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-[18px] flex items-center justify-between">
+      <header className="bg-[#0E0F0C]/95 backdrop-blur-sm border-b border-white/[0.07] sticky top-0 z-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-4 flex items-center justify-between">
           <Link
             href="/"
-            className="flex items-center gap-[9px]"
-            style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 20, color: "#0E1A3A" }}
+            className="flex items-center gap-2"
+            style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 20, color: "#F5F6F1" }}
           >
-            <span className="w-[28px] h-[28px] rounded-lg bg-[#2C3FB5] flex items-center justify-center text-white">
-              <ShieldCheck size={16} />
+            <span className="w-8 h-8 rounded-lg bg-[#CBF24D] flex items-center justify-center">
+              <span className="ms text-[#12140C]" style={{ fontSize: 18 }}>handyman</span>
             </span>
             מקצוענים
           </Link>
-          <Link href="/" className="text-[14px] text-[#6B7398] hover:text-[#2C3FB5] transition-colors">
+          <Link href="/" className="text-[14px] text-[#9A9C92] hover:text-[#F5F6F1] transition-colors">
             חזרה לדף הבית
           </Link>
         </div>
@@ -82,26 +81,26 @@ function PostJobForm() {
       <main className="max-w-lg mx-auto px-4 py-8 sm:py-12">
         {/* Trust badge */}
         <div className="flex justify-center mb-6">
-          <div className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#2C3FB5] bg-[#EAEEFB] px-[14px] py-[7px] rounded-full">
-            <ShieldCheck size={14} />
+          <div className="inline-flex items-center gap-2 text-[12px] font-semibold text-[#CBF24D] bg-[#CBF24D]/10 border border-[#CBF24D]/20 px-3 py-1.5 rounded-full">
+            <span className="ms" style={{ fontSize: 14 }}>verified</span>
             פרסום חינמי · ללא התחייבות
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-[0_4px_24px_rgba(20,30,80,0.08)] border border-[#E3E7F4] p-6 sm:p-8">
+        <div className="bg-[#1B1D18] border border-white/[0.08] rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.4)] p-6 sm:p-8">
           <h1
             className="text-[22px] sm:text-[26px] mb-1"
-            style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, color: "#0E1A3A" }}
+            style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, color: "#F5F6F1" }}
           >
             פרסם עבודה
           </h1>
-          <p className="text-[14px] sm:text-[15px] text-[#6B7398] mb-7">
+          <p className="text-[14px] sm:text-[15px] text-[#9A9C92] mb-7">
             מלא את הפרטים ובעלי מקצוע באזורך יפנו אליך
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="name" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
+              <label htmlFor="name" className="block text-[13px] font-semibold text-[#c7c9c0] mb-1.5">
                 שם מלא
               </label>
               <input
@@ -115,7 +114,7 @@ function PostJobForm() {
             </div>
 
             <div>
-              <label htmlFor="phone" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
+              <label htmlFor="phone" className="block text-[13px] font-semibold text-[#c7c9c0] mb-1.5">
                 טלפון
               </label>
               <input
@@ -130,41 +129,41 @@ function PostJobForm() {
             </div>
 
             <div>
-              <label htmlFor="category" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
+              <label htmlFor="category" className="block text-[13px] font-semibold text-[#c7c9c0] mb-1.5">
                 סוג בעל מקצוע
               </label>
               <select
                 id="category"
                 value={form.category}
                 onChange={(e) => setForm({ ...form, category: e.target.value as JobCategory })}
-                className={inputClass}
+                className={`${inputClass} cursor-pointer`}
               >
-                <option value="">בחר קטגוריה...</option>
+                <option value="" style={{ background: "#1B1D18" }}>בחר קטגוריה...</option>
                 {JOB_CATEGORIES.map((cat) => (
-                  <option key={cat} value={cat}>{cat}</option>
+                  <option key={cat} value={cat} style={{ background: "#1B1D18" }}>{cat}</option>
                 ))}
               </select>
             </div>
 
             <div>
-              <label htmlFor="city" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
+              <label htmlFor="city" className="block text-[13px] font-semibold text-[#c7c9c0] mb-1.5">
                 עיר
               </label>
               <select
                 id="city"
                 value={form.city}
                 onChange={(e) => setForm({ ...form, city: e.target.value })}
-                className={inputClass}
+                className={`${inputClass} cursor-pointer`}
               >
-                <option value="">בחר עיר...</option>
+                <option value="" style={{ background: "#1B1D18" }}>בחר עיר...</option>
                 {CITIES.map((city) => (
-                  <option key={city} value={city}>{city}</option>
+                  <option key={city} value={city} style={{ background: "#1B1D18" }}>{city}</option>
                 ))}
               </select>
             </div>
 
             <div>
-              <label htmlFor="description" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
+              <label htmlFor="description" className="block text-[13px] font-semibold text-[#c7c9c0] mb-1.5">
                 תיאור העבודה
               </label>
               <textarea
@@ -178,7 +177,7 @@ function PostJobForm() {
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-600 rounded-xl px-4 py-3 text-[13px] sm:text-[14px]">
+              <div className="bg-red-900/30 border border-red-500/30 text-red-400 rounded-xl px-4 py-3 text-[13px] sm:text-[14px]">
                 {error}
               </div>
             )}
@@ -186,13 +185,13 @@ function PostJobForm() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#2C3FB5] text-white font-bold py-[14px] rounded-xl hover:bg-[#2233a0] transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-[16px] cursor-pointer"
+              className="w-full bg-[#CBF24D] text-[#12140C] font-bold py-[14px] rounded-xl hover:bg-[#B8DB38] transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-[16px] cursor-pointer"
             >
               {loading ? "שולח..." : "פרסם עבודה בחינם"}
             </button>
 
-            <div className="flex items-center justify-center gap-2 text-[12px] text-[#9AA3C4]">
-              <Lock size={12} />
+            <div className="flex items-center justify-center gap-2 text-[12px] text-[#74766d]">
+              <span className="ms" style={{ fontSize: 14 }}>lock</span>
               הפרטים נשמרים בצורה מאובטחת ויועברו רק לבעלי מקצוע רלוונטיים
             </div>
           </form>
@@ -205,8 +204,8 @@ function PostJobForm() {
 export default function PostJobPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-[#F5F7FC] flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-[#2C3FB5] border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen bg-[#0E0F0C] flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-[#CBF24D] border-t-transparent rounded-full animate-spin" />
       </div>
     }>
       <PostJobForm />

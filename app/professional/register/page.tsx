@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ShieldCheck } from "lucide-react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase";
@@ -82,26 +81,26 @@ export default function ProfessionalRegisterPage() {
     }
   };
 
-  const inputClass = "w-full border border-[#E3E7F4] rounded-xl px-4 py-3 text-[#0E1A3A] placeholder-[#9AA3C4] bg-white focus:outline-none focus:ring-2 focus:ring-[#2C3FB5] focus:border-transparent transition-shadow text-[15px]";
+  const inputClass = "w-full border border-white/[0.08] rounded-xl px-4 py-3 text-[#F5F6F1] placeholder-[#74766d] bg-[#0E0F0C] focus:outline-none focus:ring-2 focus:ring-[#CBF24D]/40 focus:border-[#CBF24D]/50 transition-all text-[15px]";
 
   return (
-    <div className="min-h-screen bg-[#F5F7FC]">
+    <div className="min-h-screen bg-[#0E0F0C]">
       {/* Header */}
-      <header className="bg-white border-b border-[#E3E7F4] sticky top-0 z-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-[18px] flex items-center justify-between">
+      <header className="bg-[#0E0F0C]/95 backdrop-blur-sm border-b border-white/[0.07] sticky top-0 z-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-4 flex items-center justify-between">
           <Link
             href="/"
-            className="flex items-center gap-[9px]"
-            style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 20, color: "#0E1A3A" }}
+            className="flex items-center gap-2"
+            style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 20, color: "#F5F6F1" }}
           >
-            <span className="w-[28px] h-[28px] rounded-lg bg-[#2C3FB5] flex items-center justify-center text-white">
-              <ShieldCheck size={16} />
+            <span className="w-8 h-8 rounded-lg bg-[#CBF24D] flex items-center justify-center">
+              <span className="ms text-[#12140C]" style={{ fontSize: 18 }}>handyman</span>
             </span>
             מקצוענים
           </Link>
-          <p className="text-[13px] text-[#6B7398]">
+          <p className="text-[13px] text-[#9A9C92]">
             כבר רשום?{" "}
-            <Link href="/professional/login" className="text-[#2C3FB5] font-semibold hover:underline">
+            <Link href="/professional/login" className="text-[#CBF24D] font-semibold hover:underline">
               כניסה
             </Link>
           </p>
@@ -111,20 +110,20 @@ export default function ProfessionalRegisterPage() {
       <main className="max-w-2xl mx-auto px-4 py-8 sm:py-12">
         {/* Trust badge */}
         <div className="flex justify-center mb-6">
-          <div className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#2C3FB5] bg-[#EAEEFB] px-[14px] py-[7px] rounded-full">
-            <ShieldCheck size={14} />
+          <div className="inline-flex items-center gap-2 text-[12px] font-semibold text-[#CBF24D] bg-[#CBF24D]/10 border border-[#CBF24D]/20 px-3 py-1.5 rounded-full">
+            <span className="ms" style={{ fontSize: 14 }}>verified</span>
             שבועיים ניסיון חינם · ללא כרטיס אשראי
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-[0_4px_24px_rgba(20,30,80,0.08)] border border-[#E3E7F4] p-6 sm:p-8">
+        <div className="bg-[#1B1D18] border border-white/[0.08] rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.4)] p-6 sm:p-8">
           <h1
             className="text-[22px] sm:text-[26px] mb-1"
-            style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, color: "#0E1A3A" }}
+            style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, color: "#F5F6F1" }}
           >
             הרשמה לבעלי מקצוע
           </h1>
-          <p className="text-[14px] text-[#6B7398] mb-7">
+          <p className="text-[14px] text-[#9A9C92] mb-7">
             הצטרף וקבל לידים מלקוחות באזורך — שבועיים ניסיון חינם
           </p>
 
@@ -132,7 +131,7 @@ export default function ProfessionalRegisterPage() {
             {/* Name + Phone */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label htmlFor="name" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
+                <label htmlFor="name" className="block text-[13px] font-semibold text-[#c7c9c0] mb-1.5">
                   שם מלא
                 </label>
                 <input
@@ -145,7 +144,7 @@ export default function ProfessionalRegisterPage() {
                 />
               </div>
               <div>
-                <label htmlFor="phone" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
+                <label htmlFor="phone" className="block text-[13px] font-semibold text-[#c7c9c0] mb-1.5">
                   טלפון
                 </label>
                 <input
@@ -161,7 +160,7 @@ export default function ProfessionalRegisterPage() {
             </div>
 
             <div>
-              <label htmlFor="email" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
+              <label htmlFor="email" className="block text-[13px] font-semibold text-[#c7c9c0] mb-1.5">
                 אימייל
               </label>
               <input
@@ -176,7 +175,7 @@ export default function ProfessionalRegisterPage() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
+              <label htmlFor="password" className="block text-[13px] font-semibold text-[#c7c9c0] mb-1.5">
                 סיסמה
               </label>
               <input
@@ -191,9 +190,9 @@ export default function ProfessionalRegisterPage() {
 
             {/* Categories */}
             <div>
-              <label className="block text-[13px] font-semibold text-[#0E1A3A] mb-2">
+              <label className="block text-[13px] font-semibold text-[#c7c9c0] mb-2">
                 תחומי עיסוק{" "}
-                <span className="text-[#9AA3C4] font-normal">(ניתן לבחור כמה)</span>
+                <span className="text-[#74766d] font-normal">(ניתן לבחור כמה)</span>
               </label>
               <div className="flex flex-wrap gap-2">
                 {JOB_CATEGORIES.map((cat) => (
@@ -203,8 +202,8 @@ export default function ProfessionalRegisterPage() {
                     onClick={() => toggleCategory(cat)}
                     className={`px-3 py-2 rounded-lg text-[13px] font-medium border transition-colors cursor-pointer min-h-[40px] ${
                       selectedCategories.includes(cat)
-                        ? "bg-[#2C3FB5] text-white border-[#2C3FB5]"
-                        : "bg-white text-[#48527A] border-[#E3E7F4] hover:border-[#2C3FB5] hover:text-[#2C3FB5]"
+                        ? "bg-[#CBF24D] text-[#12140C] border-[#CBF24D]"
+                        : "bg-[#0E0F0C] text-[#9A9C92] border-white/[0.08] hover:border-[#CBF24D]/40 hover:text-[#CBF24D]"
                     }`}
                   >
                     {cat}
@@ -215,11 +214,11 @@ export default function ProfessionalRegisterPage() {
 
             {/* Cities */}
             <div>
-              <label className="block text-[13px] font-semibold text-[#0E1A3A] mb-2">
+              <label className="block text-[13px] font-semibold text-[#c7c9c0] mb-2">
                 אזורי שירות{" "}
-                <span className="text-[#9AA3C4] font-normal">(ניתן לבחור כמה)</span>
+                <span className="text-[#74766d] font-normal">(ניתן לבחור כמה)</span>
               </label>
-              <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto border border-[#E3E7F4] rounded-xl p-3 bg-[#F5F7FC]">
+              <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto border border-white/[0.08] rounded-xl p-3 bg-[#0E0F0C]">
                 {CITIES.map((city) => (
                   <button
                     key={city}
@@ -227,8 +226,8 @@ export default function ProfessionalRegisterPage() {
                     onClick={() => toggleCity(city)}
                     className={`px-3 py-1.5 rounded-lg text-[13px] font-medium border transition-colors cursor-pointer min-h-[36px] ${
                       selectedCities.includes(city)
-                        ? "bg-[#2C3FB5] text-white border-[#2C3FB5]"
-                        : "bg-white text-[#48527A] border-[#E3E7F4] hover:border-[#2C3FB5] hover:text-[#2C3FB5]"
+                        ? "bg-[#CBF24D] text-[#12140C] border-[#CBF24D]"
+                        : "bg-[#1B1D18] text-[#9A9C92] border-white/[0.08] hover:border-[#CBF24D]/40 hover:text-[#CBF24D]"
                     }`}
                   >
                     {city}
@@ -239,9 +238,9 @@ export default function ProfessionalRegisterPage() {
 
             {/* Description */}
             <div>
-              <label htmlFor="description" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
+              <label htmlFor="description" className="block text-[13px] font-semibold text-[#c7c9c0] mb-1.5">
                 תיאור קצר{" "}
-                <span className="text-[#9AA3C4] font-normal">(אופציונלי)</span>
+                <span className="text-[#74766d] font-normal">(אופציונלי)</span>
               </label>
               <textarea
                 id="description"
@@ -254,7 +253,7 @@ export default function ProfessionalRegisterPage() {
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-600 rounded-xl px-4 py-3 text-[13px]">
+              <div className="bg-red-900/30 border border-red-500/30 text-red-400 rounded-xl px-4 py-3 text-[13px]">
                 {error}
               </div>
             )}
@@ -262,7 +261,7 @@ export default function ProfessionalRegisterPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#2C3FB5] text-white font-bold py-[14px] rounded-xl hover:bg-[#2233a0] transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-[16px] cursor-pointer"
+              className="w-full bg-[#CBF24D] text-[#12140C] font-bold py-[14px] rounded-xl hover:bg-[#B8DB38] transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-[16px] cursor-pointer"
             >
               {loading ? "נרשם..." : "הרשמה וכניסה לדשבורד"}
             </button>

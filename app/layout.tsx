@@ -17,7 +17,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="he" dir="rtl" className={`h-full ${rubik.variable} ${heebo.variable}`}>
-      <body className="min-h-full flex flex-col bg-[#F5F7FC] text-[#0E1A3A] antialiased" style={{ fontFamily: "var(--font-heebo), sans-serif" }}>
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=block"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="min-h-full flex flex-col bg-[#0E0F0C] text-[#F5F6F1] antialiased" style={{ fontFamily: "var(--font-heebo), sans-serif" }}>
         {children}
       </body>
     </html>
