@@ -33,8 +33,8 @@ export default function Home() {
 
       {/* ── NAV ── */}
       <header className="bg-white border-b border-[#E3E7F4] sticky top-0 z-20">
-        <div className="max-w-6xl mx-auto px-10 py-[18px] flex items-center justify-between">
-          <div className="flex items-center gap-[34px]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-[18px] flex items-center justify-between">
+          <div className="flex items-center gap-6 md:gap-[34px]">
             <div className="flex items-center gap-[9px]" style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 22, color: "#0E1A3A" }}>
               <span className="w-[30px] h-[30px] rounded-lg bg-[#2C3FB5] flex items-center justify-center text-white">
                 <ShieldCheck size={18} />
@@ -42,14 +42,14 @@ export default function Home() {
               מקצוענים
             </div>
             <nav className="hidden md:flex gap-[26px] text-[15px] font-medium text-[#48527A]">
-              <a href="#how" className="hover:text-[#2C3FB5] transition-colors">איך זה עובד</a>
-              <a href="#categories" className="hover:text-[#2C3FB5] transition-colors">קטגוריות</a>
+              <a href="#how" className="hover:text-[#2C3FB5] transition-colors cursor-pointer">איך זה עובד</a>
+              <a href="#categories" className="hover:text-[#2C3FB5] transition-colors cursor-pointer">קטגוריות</a>
               <Link href="/professional/register" className="hover:text-[#2C3FB5] transition-colors">לבעלי מקצוע</Link>
             </nav>
           </div>
-          <div className="flex items-center gap-[14px]">
-            <Link href="/professional/login" className="text-[15px] font-semibold text-[#2C3FB5] hover:underline">כניסה</Link>
-            <Link href="/post-job" className="text-[15px] font-bold text-white bg-[#2C3FB5] px-5 py-[10px] rounded-[10px] hover:bg-[#2233a0] transition-colors">
+          <div className="flex items-center gap-2 sm:gap-[14px]">
+            <Link href="/professional/login" className="text-[14px] sm:text-[15px] font-semibold text-[#2C3FB5] hover:underline hidden xs:block">כניסה</Link>
+            <Link href="/post-job" className="text-[13px] sm:text-[15px] font-bold text-white bg-[#2C3FB5] px-3 sm:px-5 py-[9px] sm:py-[10px] rounded-[10px] hover:bg-[#2233a0] transition-colors cursor-pointer">
               פרסום עבודה
             </Link>
           </div>
@@ -57,51 +57,59 @@ export default function Home() {
       </header>
 
       {/* ── HERO ── */}
-      <section className="max-w-6xl mx-auto px-10 py-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        {/* Left: text */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-10 md:py-16 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center">
+        {/* Text */}
         <div>
-          <div className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#2C3FB5] bg-[#EAEEFB] px-[14px] py-[7px] rounded-full mb-[22px]">
+          <div className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#2C3FB5] bg-[#EAEEFB] px-[14px] py-[7px] rounded-full mb-[18px] sm:mb-[22px]">
             <ShieldCheck size={15} />
             כל בעלי המקצוע מאומתים
           </div>
-          <h1 style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 52, lineHeight: 1.08, letterSpacing: -1, marginBottom: 18, color: "#0E1A3A" }}>
+          <h1
+            className="text-[34px] sm:text-[44px] lg:text-[52px]"
+            style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, lineHeight: 1.08, letterSpacing: -1, marginBottom: 18, color: "#0E1A3A" }}
+          >
             מוצאים בעל מקצוע אמין —<br />
             <span style={{ color: "#2C3FB5" }}>בלי כאב ראש.</span>
           </h1>
-          <p className="text-[19px] leading-relaxed text-[#48527A] mb-8 max-w-[480px]">
+          <p className="text-[16px] sm:text-[19px] leading-relaxed text-[#48527A] mb-7 sm:mb-8 max-w-[480px]">
             מפרסמים את העבודה בחינם ומקבלים פניות מבעלי מקצוע מאומתים באזור שלכם — תוך דקות.
           </p>
 
           {/* Search bar */}
-          <Link href="/post-job" className="flex items-center gap-[10px] bg-white p-[10px] rounded-[14px] border border-[#E3E7F4] shadow-[0_10px_30px_rgba(20,30,80,0.07)] max-w-[520px] mb-8 hover:shadow-[0_10px_40px_rgba(44,63,181,0.15)] transition-shadow">
+          <Link href="/post-job" className="flex items-center gap-[10px] bg-white p-[10px] rounded-[14px] border border-[#E3E7F4] shadow-[0_10px_30px_rgba(20,30,80,0.07)] max-w-[520px] mb-7 sm:mb-8 hover:shadow-[0_10px_40px_rgba(44,63,181,0.15)] transition-shadow cursor-pointer">
             <div className="flex-1 flex items-center gap-[10px] px-[14px]">
-              <Search size={20} className="text-[#9AA3C4]" />
-              <span className="text-[16px] text-[#9AA3C4]">איזה שירות אתם צריכים?</span>
+              <Search size={20} className="text-[#9AA3C4] shrink-0" />
+              <span className="text-[15px] sm:text-[16px] text-[#9AA3C4] truncate">איזה שירות אתם צריכים?</span>
             </div>
-            <span className="text-[16px] font-bold text-white bg-[#2C3FB5] px-[26px] py-[12px] rounded-[9px]">
+            <span className="text-[14px] sm:text-[16px] font-bold text-white bg-[#2C3FB5] px-5 sm:px-[26px] py-[11px] sm:py-[12px] rounded-[9px] whitespace-nowrap">
               חיפוש
             </span>
           </Link>
 
           {/* Stats */}
-          <div className="flex gap-[26px]">
+          <div className="flex flex-wrap gap-4 sm:gap-[26px]">
             {[
               { value: "12,400+", label: "בעלי מקצוע" },
               { value: "85,000+", label: "עבודות בוצעו" },
               { value: "4.8★", label: "דירוג ממוצע" },
             ].map((s, i) => (
-              <div key={i} className="flex items-center gap-[26px]">
+              <div key={i} className="flex items-center gap-4 sm:gap-[26px]">
                 <div>
-                  <div style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 26, color: "#0E1A3A" }}>{s.value}</div>
-                  <div className="text-[13px] text-[#7A83A6]">{s.label}</div>
+                  <div
+                    className="text-[22px] sm:text-[26px]"
+                    style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, color: "#0E1A3A" }}
+                  >
+                    {s.value}
+                  </div>
+                  <div className="text-[12px] sm:text-[13px] text-[#7A83A6]">{s.label}</div>
                 </div>
-                {i < 2 && <div className="w-px h-10 bg-[#E3E7F4]" />}
+                {i < 2 && <div className="w-px h-8 sm:h-10 bg-[#E3E7F4]" />}
               </div>
             ))}
           </div>
         </div>
 
-        {/* Right: hero visual + floating card */}
+        {/* Hero visual + floating card */}
         <div className="relative hidden md:block">
           <div className="rounded-[18px] overflow-hidden border border-[#E3E7F4] shadow-[0_24px_60px_rgba(20,30,80,0.14)]">
             <div className="h-[340px] bg-[repeating-linear-gradient(135deg,#E9EDF8,#E9EDF8_11px,#F2F5FC_11px,#F2F5FC_22px)] flex items-center justify-center">
@@ -119,29 +127,32 @@ export default function Home() {
             </div>
             <div className="font-bold text-[15px] mb-1 text-[#0E1A3A]">התקנת מזגן · תל אביב</div>
             <div className="text-[13px] text-[#6B7398] leading-relaxed mb-3">דרושה התקנת מזגן עילי בסלון, קומה 3...</div>
-            <div className="text-[13px] font-bold text-white bg-[#2C3FB5] text-center py-[9px] rounded-lg">אני מעוניין</div>
+            <div className="text-[13px] font-bold text-white bg-[#2C3FB5] text-center py-[9px] rounded-lg cursor-pointer">אני מעוניין</div>
           </div>
         </div>
       </section>
 
       {/* ── CATEGORIES ── */}
-      <section id="categories" className="bg-white border-t border-[#E3E7F4] py-[58px]">
-        <div className="max-w-6xl mx-auto px-10">
-          <h2 style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 30, marginBottom: 6, color: "#0E1A3A" }}>
+      <section id="categories" className="bg-white border-t border-[#E3E7F4] py-10 sm:py-[58px]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10">
+          <h2
+            className="text-[24px] sm:text-[30px]"
+            style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, marginBottom: 6, color: "#0E1A3A" }}
+          >
             כל בעל מקצוע, במקום אחד
           </h2>
-          <p className="text-[16px] text-[#6B7398] mb-8">בחרו קטגוריה והתחילו לקבל הצעות עוד היום</p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-[14px]">
+          <p className="text-[14px] sm:text-[16px] text-[#6B7398] mb-7 sm:mb-8">בחרו קטגוריה והתחילו לקבל הצעות עוד היום</p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-[14px]">
             {CATEGORIES.map(({ icon: Icon, label }) => (
               <Link
                 key={label}
                 href={`/post-job?category=${encodeURIComponent(label)}`}
-                className="bg-white border border-[#E3E7F4] rounded-[14px] p-5 flex flex-col items-center gap-3 cursor-pointer hover:border-[#2C3FB5] hover:shadow-[0_8px_24px_rgba(44,63,181,0.12)] transition-all"
+                className="bg-white border border-[#E3E7F4] rounded-[14px] p-4 sm:p-5 flex flex-col items-center gap-3 cursor-pointer hover:border-[#2C3FB5] hover:shadow-[0_8px_24px_rgba(44,63,181,0.12)] transition-all"
               >
-                <span className="w-[46px] h-[46px] rounded-[12px] bg-[#EAEEFB] text-[#2C3FB5] flex items-center justify-center">
-                  <Icon size={24} />
+                <span className="w-[44px] h-[44px] sm:w-[46px] sm:h-[46px] rounded-[12px] bg-[#EAEEFB] text-[#2C3FB5] flex items-center justify-center">
+                  <Icon size={22} />
                 </span>
-                <span className="text-[14px] font-semibold text-[#0E1A3A] text-center">{label}</span>
+                <span className="text-[13px] sm:text-[14px] font-semibold text-[#0E1A3A] text-center">{label}</span>
               </Link>
             ))}
           </div>
@@ -149,24 +160,27 @@ export default function Home() {
       </section>
 
       {/* ── HOW IT WORKS ── */}
-      <section id="how" className="py-[60px]">
-        <div className="max-w-6xl mx-auto px-10">
-          <h2 style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 30, textAlign: "center", marginBottom: 34, color: "#0E1A3A" }}>
+      <section id="how" className="py-10 sm:py-[60px]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10">
+          <h2
+            className="text-[24px] sm:text-[30px]"
+            style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, textAlign: "center", marginBottom: 28, color: "#0E1A3A" }}
+          >
             3 צעדים לעבודה גמורה
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
             {[
               { icon: PencilLine, step: "צעד 1", title: "מתארים את העבודה", desc: "ממלאים טופס קצר — קטגוריה, עיר ותיאור. לוקח דקה." },
               { icon: Users, step: "צעד 2", title: "מקבלים פניות", desc: "בעלי מקצוע מאומתים פונים אליכם עם הצעות מחיר." },
               { icon: Handshake, step: "צעד 3", title: "בוחרים ומסכמים", desc: "משווים, בוחרים את המתאים — והעבודה מתבצעת." },
             ].map(({ icon: Icon, step, title, desc }) => (
-              <div key={step} className="bg-white border border-[#E3E7F4] rounded-[16px] p-7">
+              <div key={step} className="bg-white border border-[#E3E7F4] rounded-[16px] p-5 sm:p-7">
                 <div className="w-[48px] h-[48px] rounded-[12px] bg-[#EAEEFB] text-[#2C3FB5] flex items-center justify-center mb-4">
                   <Icon size={24} />
                 </div>
                 <div style={{ fontFamily: "var(--font-rubik)", fontSize: 13, fontWeight: 700, color: "#2C3FB5", marginBottom: 6 }}>{step}</div>
-                <div className="font-bold text-[19px] mb-2 text-[#0E1A3A]">{title}</div>
-                <div className="text-[15px] text-[#6B7398] leading-relaxed">{desc}</div>
+                <div className="font-bold text-[18px] sm:text-[19px] mb-2 text-[#0E1A3A]">{title}</div>
+                <div className="text-[14px] sm:text-[15px] text-[#6B7398] leading-relaxed">{desc}</div>
               </div>
             ))}
           </div>
@@ -174,22 +188,27 @@ export default function Home() {
       </section>
 
       {/* ── REVIEWS ── */}
-      <section className="bg-white border-t border-[#E3E7F4] py-[58px]">
-        <div className="max-w-6xl mx-auto px-10">
-          <div className="flex items-end justify-between mb-7">
-            <h2 style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 30, color: "#0E1A3A" }}>לקוחות מספרים</h2>
-            <div className="flex items-center gap-2 text-[15px] text-[#6B7398]">
+      <section className="bg-white border-t border-[#E3E7F4] py-10 sm:py-[58px]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 mb-6 sm:mb-7">
+            <h2
+              className="text-[24px] sm:text-[30px]"
+              style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, color: "#0E1A3A" }}
+            >
+              לקוחות מספרים
+            </h2>
+            <div className="flex items-center gap-2 text-[14px] sm:text-[15px] text-[#6B7398]">
               <span className="text-[#F5A623]">★★★★★</span>
               4.8 מתוך 5 · 9,200 ביקורות
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-[18px]">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-[18px]">
             {REVIEWS.map((r) => (
-              <div key={r.name} className="border border-[#E3E7F4] rounded-[14px] p-6">
+              <div key={r.name} className="border border-[#E3E7F4] rounded-[14px] p-5 sm:p-6">
                 <div className="text-[#F5A623] mb-3">★★★★★</div>
-                <p className="text-[15px] leading-[1.65] text-[#3A4263] mb-4">&quot;{r.text}&quot;</p>
+                <p className="text-[14px] sm:text-[15px] leading-[1.65] text-[#3A4263] mb-4">&quot;{r.text}&quot;</p>
                 <div className="flex items-center gap-[10px]">
-                  <span className="w-9 h-9 rounded-full bg-[#EAEEFB] text-[#2C3FB5] flex items-center justify-center font-bold text-[14px]">
+                  <span className="w-9 h-9 rounded-full bg-[#EAEEFB] text-[#2C3FB5] flex items-center justify-center font-bold text-[14px] shrink-0">
                     {r.initial}
                   </span>
                   <div>
@@ -204,28 +223,38 @@ export default function Home() {
       </section>
 
       {/* ── DUAL CTA ── */}
-      <section className="py-[60px]">
-        <div className="max-w-6xl mx-auto px-10 grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div className="bg-[#2C3FB5] rounded-[18px] p-10 text-white">
-            <h3 style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 26, marginBottom: 10 }}>צריכים בעל מקצוע?</h3>
-            <p className="text-[16px] text-[#C9D1F4] leading-relaxed mb-6">פרסמו את העבודה בחינם וקבלו הצעות עוד היום.</p>
-            <Link href="/post-job" className="inline-block text-[16px] font-bold text-[#2C3FB5] bg-white px-[26px] py-[13px] rounded-[10px] hover:bg-[#EAEEFB] transition-colors">
-              פרסום עבודה →
+      <section className="py-10 sm:py-[60px]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+          <div className="bg-[#2C3FB5] rounded-[18px] p-6 sm:p-8 lg:p-10 text-white">
+            <h3
+              className="text-[22px] sm:text-[26px]"
+              style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, marginBottom: 10 }}
+            >
+              צריכים בעל מקצוע?
+            </h3>
+            <p className="text-[15px] sm:text-[16px] text-[#C9D1F4] leading-relaxed mb-6">פרסמו את העבודה בחינם וקבלו הצעות עוד היום.</p>
+            <Link href="/post-job" className="inline-block text-[15px] sm:text-[16px] font-bold text-[#2C3FB5] bg-white px-[22px] sm:px-[26px] py-[12px] sm:py-[13px] rounded-[10px] hover:bg-[#EAEEFB] transition-colors cursor-pointer">
+              פרסום עבודה ←
             </Link>
           </div>
-          <div className="bg-[#0E1A3A] rounded-[18px] p-10 text-white">
-            <h3 style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 26, marginBottom: 10 }}>בעלי מקצוע?</h3>
-            <p className="text-[16px] text-[#A9B2D6] leading-relaxed mb-6">קבלו לידים רלוונטיים באזור שלכם, בזמן אמת.</p>
-            <Link href="/professional/register" className="inline-block text-[16px] font-bold text-[#0E1A3A] bg-white px-[26px] py-[13px] rounded-[10px] hover:bg-[#EAEEFB] transition-colors">
-              הצטרפות כבעל מקצוע →
+          <div className="bg-[#0E1A3A] rounded-[18px] p-6 sm:p-8 lg:p-10 text-white">
+            <h3
+              className="text-[22px] sm:text-[26px]"
+              style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, marginBottom: 10 }}
+            >
+              בעלי מקצוע?
+            </h3>
+            <p className="text-[15px] sm:text-[16px] text-[#A9B2D6] leading-relaxed mb-6">קבלו לידים רלוונטיים באזור שלכם, בזמן אמת.</p>
+            <Link href="/professional/register" className="inline-block text-[15px] sm:text-[16px] font-bold text-[#0E1A3A] bg-white px-[22px] sm:px-[26px] py-[12px] sm:py-[13px] rounded-[10px] hover:bg-[#EAEEFB] transition-colors cursor-pointer">
+              הצטרפות כבעל מקצוע ←
             </Link>
           </div>
         </div>
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="bg-white border-t border-[#E3E7F4] py-[30px]">
-        <div className="max-w-6xl mx-auto px-10 flex items-center justify-between text-[13px] text-[#9AA3C4]">
+      <footer className="bg-white border-t border-[#E3E7F4] py-[26px] sm:py-[30px]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 flex flex-col sm:flex-row items-center gap-2 sm:justify-between text-[13px] text-[#9AA3C4]">
           <div className="flex items-center gap-2" style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, color: "#0E1A3A", fontSize: 17 }}>
             <span className="w-6 h-6 rounded-[6px] bg-[#2C3FB5] flex items-center justify-center text-white">
               <ShieldCheck size={14} />

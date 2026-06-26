@@ -3,10 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import {
-  createUserWithEmailAndPassword,
-  updateProfile,
-} from "firebase/auth";
+import { ShieldCheck } from "lucide-react";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { auth, db } from "@/lib/firebase";
 import { JOB_CATEGORIES, CITIES, JobCategory } from "@/lib/types";
@@ -60,11 +58,7 @@ export default function ProfessionalRegisterPage() {
 
     setLoading(true);
     try {
-      const userCred = await createUserWithEmailAndPassword(
-        auth,
-        form.email,
-        form.password
-      );
+      const userCred = await createUserWithEmailAndPassword(auth, form.email, form.password);
       await updateProfile(userCred.user, { displayName: form.name });
       await setDoc(doc(db, "professionals", userCred.user.uid), {
         name: form.name,
@@ -88,88 +82,118 @@ export default function ProfessionalRegisterPage() {
     }
   };
 
+  const inputClass = "w-full border border-[#E3E7F4] rounded-xl px-4 py-3 text-[#0E1A3A] placeholder-[#9AA3C4] bg-white focus:outline-none focus:ring-2 focus:ring-[#2C3FB5] focus:border-transparent transition-shadow text-[15px]";
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-2xl mx-auto px-4 py-4 flex items-center gap-4">
-          <Link href="/" className="text-gray-400 hover:text-gray-600 text-sm">
-            ← חזרה
+    <div className="min-h-screen bg-[#F5F7FC]">
+      {/* Header */}
+      <header className="bg-white border-b border-[#E3E7F4] sticky top-0 z-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-[18px] flex items-center justify-between">
+          <Link
+            href="/"
+            className="flex items-center gap-[9px]"
+            style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 20, color: "#0E1A3A" }}
+          >
+            <span className="w-[28px] h-[28px] rounded-lg bg-[#2C3FB5] flex items-center justify-center text-white">
+              <ShieldCheck size={16} />
+            </span>
+            מקצוענים
           </Link>
-          <h1 className="text-xl font-bold text-blue-600">מקצוענים</h1>
+          <p className="text-[13px] text-[#6B7398]">
+            כבר רשום?{" "}
+            <Link href="/professional/login" className="text-[#2C3FB5] font-semibold hover:underline">
+              כניסה
+            </Link>
+          </p>
         </div>
       </header>
 
-      <main className="max-w-2xl mx-auto px-4 py-10">
-        <div className="bg-white rounded-2xl shadow-sm p-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">
+      <main className="max-w-2xl mx-auto px-4 py-8 sm:py-12">
+        {/* Trust badge */}
+        <div className="flex justify-center mb-6">
+          <div className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#2C3FB5] bg-[#EAEEFB] px-[14px] py-[7px] rounded-full">
+            <ShieldCheck size={14} />
+            שבועיים ניסיון חינם · ללא כרטיס אשראי
+          </div>
+        </div>
+
+        <div className="bg-white rounded-2xl shadow-[0_4px_24px_rgba(20,30,80,0.08)] border border-[#E3E7F4] p-6 sm:p-8">
+          <h1
+            className="text-[22px] sm:text-[26px] mb-1"
+            style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, color: "#0E1A3A" }}
+          >
             הרשמה לבעלי מקצוע
-          </h2>
-          <p className="text-gray-500 mb-8">
+          </h1>
+          <p className="text-[14px] text-[#6B7398] mb-7">
             הצטרף וקבל לידים מלקוחות באזורך — שבועיים ניסיון חינם
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Basic info */}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {/* Name + Phone */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="name" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
                   שם מלא
                 </label>
                 <input
+                  id="name"
                   type="text"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   placeholder="ישראל ישראלי"
-                  className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className={inputClass}
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="phone" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
                   טלפון
                 </label>
                 <input
+                  id="phone"
                   type="tel"
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   placeholder="050-0000000"
                   dir="ltr"
-                  className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right"
+                  className={`${inputClass} text-right`}
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="email" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
                 אימייל
               </label>
               <input
+                id="email"
                 type="email"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 placeholder="name@example.com"
                 dir="ltr"
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right"
+                className={`${inputClass} text-right`}
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="password" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
                 סיסמה
               </label>
               <input
+                id="password"
                 type="password"
                 value={form.password}
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
                 placeholder="לפחות 6 תווים"
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className={inputClass}
               />
             </div>
 
             {/* Categories */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">
+              <label className="block text-[13px] font-semibold text-[#0E1A3A] mb-2">
                 תחומי עיסוק{" "}
-                <span className="text-gray-400 font-normal">(ניתן לבחור כמה)</span>
+                <span className="text-[#9AA3C4] font-normal">(ניתן לבחור כמה)</span>
               </label>
               <div className="flex flex-wrap gap-2">
                 {JOB_CATEGORIES.map((cat) => (
@@ -177,10 +201,10 @@ export default function ProfessionalRegisterPage() {
                     key={cat}
                     type="button"
                     onClick={() => toggleCategory(cat)}
-                    className={`px-3 py-2 rounded-lg text-sm font-medium border transition-colors ${
+                    className={`px-3 py-2 rounded-lg text-[13px] font-medium border transition-colors cursor-pointer min-h-[40px] ${
                       selectedCategories.includes(cat)
-                        ? "bg-blue-600 text-white border-blue-600"
-                        : "bg-white text-gray-600 border-gray-300 hover:border-blue-300"
+                        ? "bg-[#2C3FB5] text-white border-[#2C3FB5]"
+                        : "bg-white text-[#48527A] border-[#E3E7F4] hover:border-[#2C3FB5] hover:text-[#2C3FB5]"
                     }`}
                   >
                     {cat}
@@ -191,20 +215,20 @@ export default function ProfessionalRegisterPage() {
 
             {/* Cities */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-3">
+              <label className="block text-[13px] font-semibold text-[#0E1A3A] mb-2">
                 אזורי שירות{" "}
-                <span className="text-gray-400 font-normal">(ניתן לבחור כמה)</span>
+                <span className="text-[#9AA3C4] font-normal">(ניתן לבחור כמה)</span>
               </label>
-              <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto border border-gray-200 rounded-xl p-3">
+              <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto border border-[#E3E7F4] rounded-xl p-3 bg-[#F5F7FC]">
                 {CITIES.map((city) => (
                   <button
                     key={city}
                     type="button"
                     onClick={() => toggleCity(city)}
-                    className={`px-3 py-1.5 rounded-lg text-sm font-medium border transition-colors ${
+                    className={`px-3 py-1.5 rounded-lg text-[13px] font-medium border transition-colors cursor-pointer min-h-[36px] ${
                       selectedCities.includes(city)
-                        ? "bg-blue-600 text-white border-blue-600"
-                        : "bg-white text-gray-600 border-gray-300 hover:border-blue-300"
+                        ? "bg-[#2C3FB5] text-white border-[#2C3FB5]"
+                        : "bg-white text-[#48527A] border-[#E3E7F4] hover:border-[#2C3FB5] hover:text-[#2C3FB5]"
                     }`}
                   >
                     {city}
@@ -215,23 +239,22 @@ export default function ProfessionalRegisterPage() {
 
             {/* Description */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="description" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
                 תיאור קצר{" "}
-                <span className="text-gray-400 font-normal">(אופציונלי)</span>
+                <span className="text-[#9AA3C4] font-normal">(אופציונלי)</span>
               </label>
               <textarea
+                id="description"
                 value={form.description}
-                onChange={(e) =>
-                  setForm({ ...form, description: e.target.value })
-                }
+                onChange={(e) => setForm({ ...form, description: e.target.value })}
                 placeholder="ניסיון, התמחויות, שירותים שאתה מציע..."
                 rows={3}
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                className={`${inputClass} resize-none`}
               />
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-600 rounded-xl px-4 py-3 text-sm">
+              <div className="bg-red-50 border border-red-200 text-red-600 rounded-xl px-4 py-3 text-[13px]">
                 {error}
               </div>
             )}
@@ -239,17 +262,10 @@ export default function ProfessionalRegisterPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-lg"
+              className="w-full bg-[#2C3FB5] text-white font-bold py-[14px] rounded-xl hover:bg-[#2233a0] transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-[16px] cursor-pointer"
             >
               {loading ? "נרשם..." : "הרשמה וכניסה לדשבורד"}
             </button>
-
-            <p className="text-center text-sm text-gray-500">
-              יש לך חשבון כבר?{" "}
-              <Link href="/professional/login" className="text-blue-600 font-medium hover:underline">
-                כניסה
-              </Link>
-            </p>
           </form>
         </div>
       </main>

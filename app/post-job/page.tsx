@@ -3,6 +3,7 @@
 import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { ShieldCheck, Lock } from "lucide-react";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { JOB_CATEGORIES, CITIES, JobCategory } from "@/lib/types";
@@ -55,114 +56,129 @@ function PostJobForm() {
     }
   };
 
+  const inputClass = "w-full border border-[#E3E7F4] rounded-xl px-4 py-3 text-[#0E1A3A] placeholder-[#9AA3C4] bg-white focus:outline-none focus:ring-2 focus:ring-[#2C3FB5] focus:border-transparent transition-shadow text-[15px]";
+
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-2xl mx-auto px-4 py-4 flex items-center gap-4">
-          <Link href="/" className="text-gray-400 hover:text-gray-600 text-sm">
-            ← חזרה
+    <div className="min-h-screen bg-[#F5F7FC]">
+      {/* Header */}
+      <header className="bg-white border-b border-[#E3E7F4] sticky top-0 z-20">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-[18px] flex items-center justify-between">
+          <Link
+            href="/"
+            className="flex items-center gap-[9px]"
+            style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, fontSize: 20, color: "#0E1A3A" }}
+          >
+            <span className="w-[28px] h-[28px] rounded-lg bg-[#2C3FB5] flex items-center justify-center text-white">
+              <ShieldCheck size={16} />
+            </span>
+            מקצוענים
           </Link>
-          <h1 className="text-xl font-bold text-blue-600">מקצוענים</h1>
+          <Link href="/" className="text-[14px] text-[#6B7398] hover:text-[#2C3FB5] transition-colors">
+            חזרה לדף הבית
+          </Link>
         </div>
       </header>
 
-      <main className="max-w-2xl mx-auto px-4 py-10">
-        <div className="bg-white rounded-2xl shadow-sm p-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">
+      <main className="max-w-lg mx-auto px-4 py-8 sm:py-12">
+        {/* Trust badge */}
+        <div className="flex justify-center mb-6">
+          <div className="inline-flex items-center gap-2 text-[13px] font-semibold text-[#2C3FB5] bg-[#EAEEFB] px-[14px] py-[7px] rounded-full">
+            <ShieldCheck size={14} />
+            פרסום חינמי · ללא התחייבות
+          </div>
+        </div>
+
+        <div className="bg-white rounded-2xl shadow-[0_4px_24px_rgba(20,30,80,0.08)] border border-[#E3E7F4] p-6 sm:p-8">
+          <h1
+            className="text-[22px] sm:text-[26px] mb-1"
+            style={{ fontFamily: "var(--font-rubik)", fontWeight: 800, color: "#0E1A3A" }}
+          >
             פרסם עבודה
-          </h2>
-          <p className="text-gray-500 mb-8">
+          </h1>
+          <p className="text-[14px] sm:text-[15px] text-[#6B7398] mb-7">
             מלא את הפרטים ובעלי מקצוע באזורך יפנו אליך
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Name */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="name" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
                 שם מלא
               </label>
               <input
+                id="name"
                 type="text"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 placeholder="ישראל ישראלי"
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className={inputClass}
               />
             </div>
 
-            {/* Phone */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="phone" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
                 טלפון
               </label>
               <input
+                id="phone"
                 type="tel"
                 value={form.phone}
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
                 placeholder="050-0000000"
                 dir="ltr"
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-right"
+                className={`${inputClass} text-right`}
               />
             </div>
 
-            {/* Category */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="category" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
                 סוג בעל מקצוע
               </label>
               <select
+                id="category"
                 value={form.category}
-                onChange={(e) =>
-                  setForm({ ...form, category: e.target.value as JobCategory })
-                }
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                onChange={(e) => setForm({ ...form, category: e.target.value as JobCategory })}
+                className={inputClass}
               >
                 <option value="">בחר קטגוריה...</option>
                 {JOB_CATEGORIES.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
+                  <option key={cat} value={cat}>{cat}</option>
                 ))}
               </select>
             </div>
 
-            {/* City */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="city" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
                 עיר
               </label>
               <select
+                id="city"
                 value={form.city}
                 onChange={(e) => setForm({ ...form, city: e.target.value })}
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white"
+                className={inputClass}
               >
                 <option value="">בחר עיר...</option>
                 {CITIES.map((city) => (
-                  <option key={city} value={city}>
-                    {city}
-                  </option>
+                  <option key={city} value={city}>{city}</option>
                 ))}
               </select>
             </div>
 
-            {/* Description */}
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="description" className="block text-[13px] font-semibold text-[#0E1A3A] mb-1.5">
                 תיאור העבודה
               </label>
               <textarea
+                id="description"
                 value={form.description}
-                onChange={(e) =>
-                  setForm({ ...form, description: e.target.value })
-                }
+                onChange={(e) => setForm({ ...form, description: e.target.value })}
                 placeholder="תאר מה צריך לתקן / לבצע, כמה שיותר פרטים..."
                 rows={4}
-                className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                className={`${inputClass} resize-none`}
               />
             </div>
 
             {error && (
-              <div className="bg-red-50 border border-red-200 text-red-600 rounded-xl px-4 py-3 text-sm">
+              <div className="bg-red-50 border border-red-200 text-red-600 rounded-xl px-4 py-3 text-[13px] sm:text-[14px]">
                 {error}
               </div>
             )}
@@ -170,14 +186,15 @@ function PostJobForm() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-lg"
+              className="w-full bg-[#2C3FB5] text-white font-bold py-[14px] rounded-xl hover:bg-[#2233a0] transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-[16px] cursor-pointer"
             >
               {loading ? "שולח..." : "פרסם עבודה בחינם"}
             </button>
 
-            <p className="text-center text-xs text-gray-400">
-              הפרטים שלך נשמרים בצורה מאובטחת ויועברו רק לבעלי מקצוע רלוונטיים
-            </p>
+            <div className="flex items-center justify-center gap-2 text-[12px] text-[#9AA3C4]">
+              <Lock size={12} />
+              הפרטים נשמרים בצורה מאובטחת ויועברו רק לבעלי מקצוע רלוונטיים
+            </div>
           </form>
         </div>
       </main>
@@ -187,7 +204,11 @@ function PostJobForm() {
 
 export default function PostJobPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center"><p className="text-gray-400">טוען...</p></div>}>
+    <Suspense fallback={
+      <div className="min-h-screen bg-[#F5F7FC] flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-[#2C3FB5] border-t-transparent rounded-full animate-spin" />
+      </div>
+    }>
       <PostJobForm />
     </Suspense>
   );
